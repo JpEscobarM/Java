@@ -53,15 +53,15 @@ public class UsuarioController {
 	public ResponseEntity<Usuario> editarUsuario(@RequestBody Usuario usuario)
 	{
 		Usuario usuarioModificado = dao.save(usuario);
-		return ResponseEntity.status(200).body(usuarioModificado);
+		return ResponseEntity.status(201).body(usuarioModificado);
 	}
 	
 	@DeleteMapping("/{id}")
-	public Optional<Usuario> deletarUsuario(@PathVariable Integer id)
+	public ResponseEntity<?> deletarUsuario(@PathVariable Integer id)
 	{
-		Optional<Usuario> usuario = dao.findById(id);
 		dao.deleteById(id);
-		return usuario;
+		
+		return ResponseEntity.status(204).build();
 	}
 	
 }
